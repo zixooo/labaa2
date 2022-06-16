@@ -2,30 +2,27 @@
 
 #include <substring.hpp>
 
-size_t str_find(const std::string& a, const std::string& b){
-  size_t n =  a.size();
-  size_t m  = b.size();
+size_t str_find(const std::string& a, const std::string& b) {
+  size_t n = a.size();
+  size_t m = b.size();
   if (m > n) {
-    return - 1;
+    return -1;
   } else {
-    for (size_t i = 0; i < n - m + 1; i++){
-      for (size_t j = 0; j < m; j++){
-        if (a[i+j] == b[j]) {
-          if ( m-1 == j)
-            return i;
+    for (size_t i = 0; i < n - m + 1; i++) {
+      for (size_t j = 0; j < m; j++) {
+        if (a[i + j] == b[j]) {
+          if (m - 1 == j) return i;
           continue;
-        }
-        else
-        {
+        } else {
           break;
         }
       }
-      }
-      return - 1;
+    }
+    return -1;
   }
 }
 
-//hash hash oni kuryat hash
+// hash hash oni kuryat hash
 size_t rk_find(const std::string& a, const std::string& b) {
   int i, j;
   int p = 0;
@@ -61,9 +58,9 @@ size_t rk_find(const std::string& a, const std::string& b) {
   return -1;
 }
 std::vector<int> lps_func(const std::string& s);
-size_t kmp_find(const std::string& a, const std::string& b){
+size_t kmp_find(const std::string& a, const std::string& b) {
   size_t i;
-  std::vector<int> pi = lps_func(b +'#'+a);
+  std::vector<int> pi = lps_func(b + '#' + a);
   int t_len = b.length();
   for (i = 0; i < a.size(); i++) {
     if (pi[t_len + 1 + i] == t_len) {
@@ -73,9 +70,9 @@ size_t kmp_find(const std::string& a, const std::string& b){
   return -1;
 }
 
-std::vector<int> lps_func(const std::string& s){
+std::vector<int> lps_func(const std::string& s) {
   size_t i;
-  std::vector<int>pi(s.length(),0);
+  std::vector<int> pi(s.length(), 0);
   for (i = 1; i < s.length(); i++) {
     int j = pi[i - 1];
     while (j > 0 && s[i] != s[j]) {
